@@ -25,17 +25,23 @@ function bindFilePreview(inputId, previewId, cardId) {
   input.addEventListener('change', () => {
     const file = input.files[0];
     if (!file) return;
-    const url = URL.createObjectURL(file);
-    // URL.createObjectURL always returns a blob: scheme URL; safe for src
-    if (url.startsWith('blob:')) {
-      preview.setAttribute('src', url);
-    }
-    preview.hidden = false;
-    card.classList.add('has-file');
-    // hide upload label text
-    const label = card.querySelector('.upload-label');
-    if (label) label.style.display = 'none';
-    checkSubmitReady(input.closest('form'));
+
+    // Use FileReader to produce a data URL; check MIME prefix before
+    // assigning to prevent non-media content reaching the DOM.
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const result = event.target && event.target.result;
+      if (typeof result === 'string' &&
+          (result.startsWith('data:image/') || result.startsWith('data:video/'))) {
+        preview.setAttribute('src', result);
+        preview.hidden = false;
+        card.classList.add('has-file');
+        const label = card.querySelector('.upload-label');
+        if (label) label.style.display = 'none';
+        checkSubmitReady(input.closest('form'));
+      }
+    };
+    reader.readAsDataURL(file);
   });
 
   // make the card clickable
