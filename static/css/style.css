@@ -1,0 +1,253 @@
+/* ── Reset & Base ─────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0d0f17;
+  --surface:   #161926;
+  --surface2:  #1f2436;
+  --border:    #2d3452;
+  --accent:    #7c5cfc;
+  --accent2:   #a78bfa;
+  --text:      #e8eaf6;
+  --text-muted:#8b91b8;
+  --success:   #22c55e;
+  --error:     #ef4444;
+  --radius:    14px;
+  --transition:0.2s ease;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container { width: 100%; max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* ── Header ──────────────────────────────────────────────────────────── */
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 1.25rem 0;
+  text-align: center;
+}
+
+.logo { display: flex; align-items: center; justify-content: center; gap: .5rem; }
+.logo-icon { font-size: 2rem; }
+.logo-text { font-size: 1.9rem; font-weight: 800; letter-spacing: -0.5px; }
+.accent { color: var(--accent2); }
+
+.tagline { color: var(--text-muted); margin-top: .25rem; font-size: .95rem; }
+
+/* ── Main ─────────────────────────────────────────────────────────────── */
+main { flex: 1; padding: 2rem 0; }
+
+/* ── Tabs ─────────────────────────────────────────────────────────────── */
+.tabs {
+  display: flex;
+  gap: .75rem;
+  margin-bottom: 2rem;
+}
+
+.tab-btn {
+  flex: 1;
+  background: var(--surface);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: .85rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.tab-btn:hover { border-color: var(--accent2); color: var(--text); }
+.tab-btn.active {
+  background: linear-gradient(135deg, #7c5cfc 0%, #a855f7 100%);
+  color: #fff;
+  border-color: transparent;
+}
+
+/* ── Panel ─────────────────────────────────────────────────────────────── */
+.tab-panel h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: .5rem;
+}
+
+.description { color: var(--text-muted); margin-bottom: 1.75rem; }
+
+/* ── Upload grid ──────────────────────────────────────────────────────── */
+.upload-grid {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.upload-card {
+  flex: 1;
+  background: var(--surface);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--transition);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.upload-card:hover { border-color: var(--accent2); background: var(--surface2); }
+.upload-card.has-file { border-style: solid; border-color: var(--accent); }
+
+.upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  width: 100%;
+  height: 100%;
+  padding: 2rem 1.5rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.upload-icon { font-size: 2.5rem; }
+.upload-title { font-weight: 700; font-size: 1.05rem; }
+.upload-hint { color: var(--text-muted); font-size: .85rem; }
+
+.preview {
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  display: block;
+  border-radius: calc(var(--radius) - 2px);
+}
+
+.arrow-divider {
+  font-size: 1.75rem;
+  color: var(--accent2);
+  flex-shrink: 0;
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────────── */
+.btn-primary {
+  display: block;
+  width: 100%;
+  background: linear-gradient(135deg, #7c5cfc 0%, #a855f7 100%);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-bottom: 1.5rem;
+}
+
+.btn-primary:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.btn-primary:not(:disabled):hover { filter: brightness(1.15); }
+
+.btn-download {
+  display: inline-block;
+  background: var(--success);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: .65rem 1.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: .95rem;
+  margin-top: 1rem;
+  transition: var(--transition);
+}
+
+.btn-download:hover { filter: brightness(1.1); }
+
+/* ── Progress ─────────────────────────────────────────────────────────── */
+.progress-wrap { margin-bottom: 1.5rem; }
+.progress-bar {
+  background: var(--surface2);
+  border-radius: 99px;
+  height: 10px;
+  overflow: hidden;
+  margin-bottom: .5rem;
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, #7c5cfc, #a855f7);
+  height: 100%;
+  width: 0%;
+  border-radius: 99px;
+  transition: width .4s ease;
+}
+
+.progress-label { color: var(--text-muted); font-size: .9rem; text-align: center; }
+
+/* ── Result ───────────────────────────────────────────────────────────── */
+.result-area {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.result-area h3 { font-size: 1.2rem; margin-bottom: 1rem; }
+
+.result-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .75rem;
+}
+
+.result-media {
+  max-width: 100%;
+  max-height: 420px;
+  border-radius: calc(var(--radius) - 2px);
+  object-fit: contain;
+}
+
+/* ── Error ────────────────────────────────────────────────────────────── */
+.error-box {
+  background: rgba(239, 68, 68, .1);
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  font-size: .95rem;
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────── */
+.site-footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 1rem 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: .875rem;
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .upload-grid { flex-direction: column; }
+  .arrow-divider { transform: rotate(90deg); }
+  .tabs { flex-direction: column; }
+}

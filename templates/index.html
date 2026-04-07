@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reface AI – Generate Images &amp; Videos</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">🤖</span>
+        <span class="logo-text">Reface<span class="accent">AI</span></span>
+      </div>
+      <p class="tagline">AI-powered face swap for images &amp; videos</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ── Tab Navigation ─────────────────────────────────────────── -->
+    <nav class="tabs" role="tablist">
+      <button class="tab-btn active" role="tab" data-tab="image">
+        🖼️ Image Reface
+      </button>
+      <button class="tab-btn" role="tab" data-tab="video">
+        🎬 Video Reface
+      </button>
+    </nav>
+
+    <!-- ── IMAGE PANEL ─────────────────────────────────────────────── -->
+    <section id="tab-image" class="tab-panel active" role="tabpanel">
+      <h2>Image Face Swap</h2>
+      <p class="description">
+        Upload a <strong>source face</strong> (the face you want to put in)
+        and a <strong>target image</strong> (where you want the face to appear).
+      </p>
+
+      <form id="image-form" class="swap-form" novalidate>
+        <div class="upload-grid">
+          <div class="upload-card" id="src-img-card">
+            <label class="upload-label" for="src-img-input">
+              <div class="upload-icon">👤</div>
+              <span class="upload-title">Source Face</span>
+              <span class="upload-hint">JPG, PNG, WEBP – the face to use</span>
+            </label>
+            <input type="file" id="src-img-input" name="source" accept=".jpg,.jpeg,.png,.webp,.bmp" hidden />
+            <img class="preview" id="src-img-preview" src="" alt="" hidden />
+          </div>
+
+          <div class="arrow-divider">➜</div>
+
+          <div class="upload-card" id="tgt-img-card">
+            <label class="upload-label" for="tgt-img-input">
+              <div class="upload-icon">🖼️</div>
+              <span class="upload-title">Target Image</span>
+              <span class="upload-hint">JPG, PNG, WEBP – where to place the face</span>
+            </label>
+            <input type="file" id="tgt-img-input" name="target" accept=".jpg,.jpeg,.png,.webp,.bmp" hidden />
+            <img class="preview" id="tgt-img-preview" src="" alt="" hidden />
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary" id="image-submit-btn" disabled>
+          ✨ Generate Image
+        </button>
+      </form>
+
+      <div id="image-result" class="result-area" hidden>
+        <h3>Result</h3>
+        <div class="result-inner">
+          <img id="image-result-img" src="" alt="Reface result" class="result-media" />
+          <a id="image-download-btn" class="btn-download" href="#" download>
+            ⬇️ Download Image
+          </a>
+        </div>
+      </div>
+
+      <div id="image-progress" class="progress-wrap" hidden>
+        <div class="progress-bar"><div class="progress-fill" id="image-progress-fill"></div></div>
+        <p class="progress-label" id="image-progress-label">Processing…</p>
+      </div>
+
+      <div id="image-error" class="error-box" hidden></div>
+    </section>
+
+    <!-- ── VIDEO PANEL ─────────────────────────────────────────────── -->
+    <section id="tab-video" class="tab-panel" role="tabpanel" hidden>
+      <h2>Video Face Swap</h2>
+      <p class="description">
+        Upload a <strong>source face</strong> image and a <strong>target video</strong>.
+        The AI will replace every face in the video with your source face.
+      </p>
+
+      <form id="video-form" class="swap-form" novalidate>
+        <div class="upload-grid">
+          <div class="upload-card" id="src-vid-card">
+            <label class="upload-label" for="src-vid-input">
+              <div class="upload-icon">👤</div>
+              <span class="upload-title">Source Face</span>
+              <span class="upload-hint">JPG, PNG, WEBP – the face to use</span>
+            </label>
+            <input type="file" id="src-vid-input" name="source" accept=".jpg,.jpeg,.png,.webp,.bmp" hidden />
+            <img class="preview" id="src-vid-preview" src="" alt="" hidden />
+          </div>
+
+          <div class="arrow-divider">➜</div>
+
+          <div class="upload-card" id="tgt-vid-card">
+            <label class="upload-label" for="tgt-vid-input">
+              <div class="upload-icon">🎬</div>
+              <span class="upload-title">Target Video</span>
+              <span class="upload-hint">MP4, MOV, AVI, WEBM – the video to modify</span>
+            </label>
+            <input type="file" id="tgt-vid-input" name="target" accept=".mp4,.mov,.avi,.mkv,.webm" hidden />
+            <video class="preview" id="tgt-vid-preview" controls hidden></video>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary" id="video-submit-btn" disabled>
+          ✨ Generate Video
+        </button>
+      </form>
+
+      <div id="video-result" class="result-area" hidden>
+        <h3>Result</h3>
+        <div class="result-inner">
+          <video id="video-result-vid" class="result-media" controls></video>
+          <a id="video-download-btn" class="btn-download" href="#" download>
+            ⬇️ Download Video
+          </a>
+        </div>
+      </div>
+
+      <div id="video-progress" class="progress-wrap" hidden>
+        <div class="progress-bar"><div class="progress-fill" id="video-progress-fill"></div></div>
+        <p class="progress-label" id="video-progress-label">Processing frames…</p>
+      </div>
+
+      <div id="video-error" class="error-box" hidden></div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Reface AI &copy; 2024 – Powered by InsightFace &amp; OpenCV</p>
+    </div>
+  </footer>
+
+  <script src="/static/js/main.js"></script>
+</body>
+</html>
