@@ -1,0 +1,11 @@
+.env.local
+.next
+node_modules
+.turbo
+dist
+.DS_Store
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+*.log
+prisma/*.db
